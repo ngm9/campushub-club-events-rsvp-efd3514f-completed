@@ -33,7 +33,8 @@ export default function App() {
       const updatedEvent = await res.json();
       const existing = events.find((e) => e.id === updatedEvent.id);
       existing.attendees = updatedEvent.attendees;
-      setEvents(events);
+      setEvents((prevEvents)=>prevEvents.map((event)=>event.id===updatedEvent.id?updatedEvent:event)
+    );
     } catch (err) {
       setError('RSVP failed.');
     }
